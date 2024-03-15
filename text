@@ -1,0 +1,209 @@
+DOCKER
+
+commands:
+- [ ] brew install wget
+- [ ] brew install docker
+- [ ] docker —version
+- [ ] docker ps
+- [ ] docker images
+- [ ] docker build .
+- [ ] echo "export PATH=/opt/homebrew/bin:$PATH" >> ~/.bash_profile && source ~/.bash_profile
+- [ ] docker build . -t moto:1.0
+- [ ] docker ps -a
+- [ ] docker exec -it name bash or sh
+- [ ] docker run —rm -it —entrypoint /bin/bash moto:1.0
+
+
+
+
+
+python3 -m venv my-venv
+Source my -venv
+Source my-venv/bin/activate
+Pip install -e .
+git config --global user.name "abhishek"
+git config --global user.email "abhishekg1194@gmail.com"
+
+
+
+
+
+@app.route('/')
+@app.route('/hello')
+def helloworld():
+    return "hello world"
+
+if __name__=='__main__':
+    app.debug = True
+    app.run(host='0.0.0.0', port=5000)
+
+
+
+
+creating a flask server & uploading it in github
+
+Open vs code
+
+create folder : any anme
+and then:
+
+src/apache/__init__.py/app.py/py.typed
+
+app.py:
+from flask import Flask
+tvs=Flask(__name__)
+@tvs.route('/')
+def tvs_home():
+    return 'welcome to tvs motorcycles homepage'
+
+tests/__init__.py/test_app.py
+
+test_app.py:
+import pytest
+from tvs.app import tvs
+def test_sample():
+    assert True is True
+
+@pytest.mark.xfail()
+def test_failuresample():
+    assert False is True
+
+requirements.txt
+flask
+
+requirement_dev.txt:
+pytest
+pytest-cov
+pytest-mock
+tox
+
+.gitignore:
+tvs-venv
+*.pyc
+*.egg-info
+.coverage
+
+
+readme.md
+
+.pyproject.toml:
+[build-system]
+requires=["setuptools","wheel"]
+build-backend="setuptools.build_meta"
+
+[tool.pytest.ini_options]
+addopts = "--cov=tvs"
+testpaths = [
+    "tests",
+]
+
+setup.cfg:
+[metadata]
+name=tvs
+description=create local webserver using flask
+author=shek
+license=MIT
+platforms = osx,linux,win32
+classifiers =
+    Programming Language :: Python :: 3
+    Programming Language :: Python :: 3 :: Only
+    Programming Language :: Python :: 3.11
+[options]
+packages=tvs
+install_requires=flask
+python_requires= >=3.11
+package_dir= =src
+zip_safe=no
+[options.package_data]
+webserver = py.typed
+[options.extras_require]
+testing =
+    pytest
+    pytest-cov
+    pytest-mock
+
+
+
+setup.py:
+from setuptools import setup
+if __name__ == '__main__':
+    setup()
+
+
+tox.ini:
+
+[tox]
+minversion = 3.11
+envlist = py311
+isolated_build = true
+
+[gh-actions]
+python =
+    3.11: py311
+
+[testenv]
+setenv =
+    PYTHONPATH = {toxinidir}
+deps =
+    -r{toxinidir}/requirements_dev.txt
+commands =
+    pytest --basetemp={envtmpdir}
+
+
+.github/workflows/tests.yml
+
+tests.yml:
+name: Tests
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ['3.11']
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install tox tox-gh-actions
+    - name: Test with tox
+      run: tox
+
+
+run&debug:
+create a launch.json file,
+launch.json:
+add after  module:flask
+"cwd":"${workspaceFolder}/src/tvs",
+
+
+
+
+TERMINAL:
+python3 -m venv name-venv
+
+source name-venv/bin/activate
+
+pip install -e.
+
+pip install -r reuirements_dev.txt
+
+pytest
+
+tox
+
+
+source control:
+git repostiry
+
